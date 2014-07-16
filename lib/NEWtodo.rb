@@ -40,14 +40,12 @@ end
 
 post '/save' do
 	ToDo.new.add(params["task"])
-	redirect to('/') unless params["frombeta"]
-	redirect to('/beta')
+	redirect to('/')
 end
 
 post '/del' do
 	ToDo.new.delete(params["chk"])
-	redirect to('/') unless params["frombeta"]
-	redirect to('/beta')
+	redirect to('/')
 end
 
 get '/api/list' do
@@ -55,3 +53,12 @@ get '/api/list' do
 	everything["list"] = ToDo.new.all
 	everything["list"].to_json
 end
+
+post '/beta/save/:itemtosave' do
+	ToDo.new.add(params["itemtosave"])
+end
+
+post '/beta/del/:itemtodel' do
+	ToDo.new.delete(params["itemtodel"])
+end
+

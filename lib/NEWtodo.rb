@@ -1,6 +1,7 @@
 require 'pry'
 require 'sinatra'
 require 'pstore'
+require 'json'
 
 class ToDo
 	def initialize()
@@ -27,7 +28,9 @@ class ToDo
 	end
 end
 
-
+get '/beta' do
+	erb :beta
+end
 
 get '/' do
 	@todo_items = ToDo.new.all
@@ -37,10 +40,18 @@ end
 
 post '/save' do
 	ToDo.new.add(params["task"])
-	redirect to('/')
+	redirect to('/') unless params["frombeta"]
+	redirect to('/beta')
 end
 
 post '/del' do
 	ToDo.new.delete(params["chk"])
-	redirect to('/')
+	redirect to('/') unless params["frombeta"]
+	redirect to('/beta')
+end
+
+get '/api/list' do
+	everything = Hash.new
+	everything["list"] = ToDo.new.all
+	everything["list"].to_json
 end

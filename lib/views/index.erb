@@ -1,25 +1,23 @@
-<% require 'pry' %>
-
 <html>
 <body>
-	<h1> TODO </h1>
+	<h1>ToDo</h1>
 	<form action="/save" method="POST">
 		<input name="task" id="inputText" />
 	</form>
-
-	<table class="delete">
+	<table class="display">
 	<% @todo_items.each do |item| 
 	%>
-			<tr>
-				<td>
-					<form method="POST" action="/del">
-						<input type="checkbox" name="chk" value="<%= item %>" onclick="this.form.submit();"/>
-						<%= item %>
-					</form>
-				</td>
-			</tr>
-	<% end%>
+		<tr>
+			<td>
+				<form method="POST" action="/del">
+					<input type="checkbox" name="chk" value="<%= item %>" onclick="this.form.submit();"/>
+					<%= item %>
+				</form>
+			</td>
+		</tr>
+	<% end %>
 	</table>
-	<script type="text/javascript">onload(document.getElementById('inputText').focus());</script>
+	<script type="text/javascript" src="/js/jquery-2.1.1.js"></script>
+	<script type="text/javascript">document.getElementById('inputText').focus();</script>
 </body>
 </html>

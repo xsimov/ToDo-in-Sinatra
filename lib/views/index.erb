@@ -1,0 +1,25 @@
+<%require 'pry'%>
+
+<html>
+<body>
+	<h1> TODO </h1>
+	<form action="/" method="POST">
+		<input name="task" id="inputText" />
+	</form>
+
+	<table class="delete">
+	<% 
+	ToDo.getMyTasks.each do |item| %>
+		<tr>
+			<td>
+				<form method="POST" action="/del">
+					<input type="checkbox" name="chk" value="<%= item.task %>" onclick="this.form.submit();"/>
+					<%= item.task %>
+				</form>
+			</td>
+		</tr>
+	<% end %>
+	</table>
+	<script type="text/javascript">onload(document.getElementById('inputText').focus());</script>
+</body>
+</html>

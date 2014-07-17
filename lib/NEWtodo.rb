@@ -1,4 +1,3 @@
-require 'pry'
 require 'sinatra'
 require 'pstore'
 require 'json'
@@ -28,7 +27,7 @@ class ToDo
 	end
 end
 
-get '/beta' do
+get '/beta' do  #!!!!
 	erb :beta
 end
 
@@ -61,4 +60,3 @@ end
 post '/beta/del/:itemtodel' do
 	ToDo.new.delete(params["itemtodel"])
 end
-
